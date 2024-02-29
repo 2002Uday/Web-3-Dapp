@@ -1,10 +1,12 @@
+const hre = require("hardhat");
+
 const main = async () => {
   const transactionsFactory = await hre.ethers.getContractFactory("Transactions");
   const transactionsContract = await transactionsFactory.deploy();
 
-  await transactionsContract.deployed();
+  await transactionsContract.waitForDeployment();
 
-  console.log("Transactions address: ", transactionsContract.address);
+  console.log("Transactions address: ", transactionsContract.target);
 };
 
 const runMain = async () => {
