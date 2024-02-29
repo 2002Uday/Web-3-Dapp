@@ -3,6 +3,7 @@ import { HiMenuAlt4 } from "react-icons/hi";
 import { AiOutlineClose } from "react-icons/ai";
 
 import logo from "../../images/logo.png";
+import logo2 from "../../images/logo2.png";
 import { TransactionContext } from "../context/TransactionContext";
 
 const NavBarItem = ({ title, classprops }) => (
@@ -16,7 +17,7 @@ const Navbar = () => {
   return (
     <nav className="w-full flex md:justify-center justify-between items-center p-4">
       <div className="md:flex-[0.5] flex-initial justify-center items-center">
-        <img src={logo} alt="logo" className="w-32 cursor-pointer" />
+        <img src={logo2} alt="logo" className="w-52 cursor-pointer" />
       </div>
       <ul className="text-white md:flex hidden list-none flex-row justify-between items-center flex-initial">
         {/* {["Market", "Exchange", "Tutorials", "Wallets"].map((item, index) => (
@@ -32,14 +33,13 @@ const Navbar = () => {
           </>
           
         ):(
-          <li type="button"
-          onClick={disconnect} className="border-2 border-purple-500 bg-purple-500 hover:bg-transparent py-2 px-7 mx-4 rounded-full cursor-pointer">
-          Logout
-        </li>
+          <li>
+            Disconnect Your Wallet From Metamask
+          </li>
         )}
         
       </ul>
-      <div className="flex relative">
+      {/* <div className="flex relative">
         {!toggleMenu && (
           <HiMenuAlt4 fontSize={28} className="text-white md:hidden cursor-pointer" onClick={() => setToggleMenu(true)} />
         )}
@@ -57,7 +57,7 @@ const Navbar = () => {
             )}
           </ul>
         )}
-      </div>
+      </div> */}
     </nav>
   );
 };

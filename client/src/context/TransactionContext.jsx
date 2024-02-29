@@ -90,7 +90,7 @@ export const TransactionsProvider = ({ children }) => {
     try {
       if (!ethereum) return alert("Please install MetaMask.");
 
-      const accounts = await ethereum.request({ method: "eth_requestAccounts" });
+      const accounts = await ethereum.request({ method: "eth_requestAccounts", });
 
       setCurrentAccount(accounts[0]);
       window.location.reload();
@@ -100,11 +100,6 @@ export const TransactionsProvider = ({ children }) => {
       throw new Error("No ethereum object");
     }
   };
-
-  const disconnect = async () => {
-    const accounts = null;
-    setCurrentAccount(accounts);
-  }
 
   const sendTransaction = async () => {
     try {
@@ -155,7 +150,6 @@ export const TransactionsProvider = ({ children }) => {
       value={{
         transactionCount,
         connectWallet,
-        disconnect,
         transactions,
         currentAccount,
         isLoading,

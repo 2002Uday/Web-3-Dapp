@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { AiFillPlayCircle } from "react-icons/ai";
 import { SiEthereum } from "react-icons/si";
-import { BsInfoCircle } from "react-icons/bs";
-
+import { BsQrCodeScan } from "react-icons/bs";
+import QrReader from "react-qr-scanner";
 import { TransactionContext } from "../context/TransactionContext";
 import { shortenAddress } from "../utils/shortenAddress";
 import { Loader } from ".";
@@ -17,11 +17,30 @@ const Input = ({ placeholder, name, type, value, handleChange }) => (
     step="0.0001"
     value={value}
     onChange={(e) => handleChange(e, name)}
-    className="my-2 w-full rounded-sm p-2 rounded-lg bg-gray-200 font-semibold text-white text-sm"
+    className="my-2 w-full rounded-sm p-2 rounded-lg bg-gray-200 font-semibold text-sm"
   />
 );
 
 const Welcome = () => {
+  const delay = 500;
+
+  const previewStyle = {
+    height: 240,
+    width: 320,
+  };
+
+  const [result, setResult] = useState("");
+
+  const handleScan = (result) => {
+    if (result) {
+      setResult(result.text);
+    }
+  };
+
+  const handleError = (error) => {
+    console.log(error);
+  };
+
   const {
     currentAccount,
     connectWallet,
@@ -30,6 +49,9 @@ const Welcome = () => {
     formData,
     isLoading,
   } = useContext(TransactionContext);
+
+  // const [QrValue, setQrValue] = useState("");
+  const [Toggle, setToggle] = useState(false);
 
   const handleSubmit = (e) => {
     const { addressTo, amount, keyword, message } = formData;
@@ -40,6 +62,10 @@ const Welcome = () => {
 
     sendTransaction();
   };
+
+  const Scanner = () => {
+    setToggle(true);
+  }
 
   return (
     <>
@@ -79,7 +105,7 @@ const Welcome = () => {
         <div className="flex mf:flex-row flex-col items-start justify-between md:p-20 py-12 px-4">
           <div className="flex flex-1 justify-start items-start flex-col mf:mr-10">
             <h1 className="text-3xl sm:text-5xl font-extrabold text-gray-800 py-1">
-              Make Transection <br /> From Here
+              Make Transaction <br /> From Here
             </h1>
             {!currentAccount && (
               <button
@@ -146,8 +172,34 @@ const Welcome = () => {
           </div> */}
             <div className="p-5 sm:w-full flex flex-col justify-start items-center blue-glassmorphism">
               <p className="text-gray-800 text-center text-xl font-bold mb-2">
-                Add Address Below To make the Teansection
+                Add Address Below To make the Teansaction
               </p>
+              { result === "" && !Toggle ? 
+               ( <button onClick={Scanner} className="text-gray-700 font-bold px-3 py-1 drop-shadow-lg bg-white rounded-md flex justify-around gap-2 items-center">
+                  <BsQrCodeScan />
+                  <p>Scan QR</p>
+                </button> ) : (
+                  <p>{result}</p> 
+                )}
+              {Toggle ? (
+                <div className="relative ">
+                {
+                  result === "" ? 
+                  <>
+                  <div className="absolute rounded-lg inset-y-0 right-1/4 top-14 h-3/5 w-1/2 border-4 border-red-700"></div>
+                  <QrReader
+                  delay={delay}
+                  style={previewStyle}
+                  onError={handleError}
+                  onScan={handleScan}
+                  className="rounded-3xl m-1"
+                  />
+                  </>
+                  : " "}
+                </div>
+              ) : (
+                ""
+              )}
               <Input
                 placeholder="Address To"
                 name="addressTo"
