@@ -177,7 +177,7 @@ const Welcome = () => {
                 Add Address Below To make the Transaction
               </p>
               { result === "" && !Toggle ? 
-               ( <button onClick={Scanner} className="text-gray-700 font-bold px-3 py-1 drop-shadow-lg bg-white rounded-md flex justify-around gap-2 items-center">
+               ( <button onClick={Scanner} className="sm:hidden text-gray-700 font-bold px-3 py-1 drop-shadow-lg bg-white rounded-md flex justify-around gap-2 items-center">
                   <BsQrCodeScan />
                   <p>Scan QR</p>
                 </button> ) : (
