@@ -55,7 +55,9 @@ const Welcome = () => {
 
   const handleSubmit = (e) => {
     const { addressTo, amount, keyword, message } = formData;
-
+    if(Toggle){
+      formData.addressTo = result
+    }
     e.preventDefault();
 
     if (!addressTo || !amount || !keyword || !message) return;
@@ -172,14 +174,14 @@ const Welcome = () => {
           </div> */}
             <div className="p-5 sm:w-full flex flex-col justify-start items-center blue-glassmorphism">
               <p className="text-gray-800 text-center text-xl font-bold mb-2">
-                Add Address Below To make the Teansaction
+                Add Address Below To make the Transaction
               </p>
               { result === "" && !Toggle ? 
                ( <button onClick={Scanner} className="text-gray-700 font-bold px-3 py-1 drop-shadow-lg bg-white rounded-md flex justify-around gap-2 items-center">
                   <BsQrCodeScan />
                   <p>Scan QR</p>
                 </button> ) : (
-                  <p>{result}</p> 
+                  ""
                 )}
               {Toggle ? (
                 <div className="relative ">
@@ -195,13 +197,13 @@ const Welcome = () => {
                   className="rounded-3xl m-1"
                   />
                   </>
-                  : " "}
+                  : ""}
                 </div>
               ) : (
                 ""
               )}
               <Input
-                placeholder="Address To"
+                placeholder={result ? result : "Address To"}
                 name="addressTo"
                 type="text"
                 handleChange={handleChange}
