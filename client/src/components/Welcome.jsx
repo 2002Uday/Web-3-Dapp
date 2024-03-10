@@ -96,17 +96,17 @@ const Welcome = () => {
         </div>
       ) : (
         <div className="flex w-full justify-center items-center pt-24">
-          <div className="p-3 flex justify-center items-center flex-col rounded-xl h-40 sm:w-72 w-full my-5 eth-card">
-          <p className="text-sm sm:text-xl font-semibold text-gray-800">
+          <div className="p-3 flex justify-center items-center flex-col rounded-xl h-44 sm:w-72 w-4/5 my-5 eth-card">
+            <p className="text-lg sm:text-xl font-semibold text-gray-800">
               Connect Your Wallet
             </p>
           </div>
       </div>
       )}
       <div className="flex w-full justify-center items-center">
-        <div className="flex mf:flex-row flex-col items-start justify-between md:p-20 py-12 px-4">
-          <div className="flex flex-1 justify-start items-start flex-col mf:mr-10">
-            <h1 className="text-3xl sm:text-5xl font-extrabold text-gray-800 py-1">
+        <div className="flex mf:flex-row flex-col items-center justify-between md:p-20 py-12 px-4">
+          <div className="flex flex-1 w-full justify-start items-start flex-col mf:mr-10">
+            <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-800 py-1">
               Make Transaction <br /> From Here
             </h1>
             {!currentAccount && (
@@ -122,7 +122,7 @@ const Welcome = () => {
               </button>
             )}
 
-            <div className="grid sm:grid-cols-3 grid-cols-2 w-full text-black mt-10">
+            <div className="grid  grid-cols-3 w-full text-black mt-10">
               <div
                 className={`rounded-tl-2xl ${companyCommonStyles} text-black`}
               >
@@ -192,9 +192,6 @@ const Welcome = () => {
                   <QrReader
                   delay={delay}
                   style={previewStyle}
-                  constraints={{
-                    facingMode: 'environment'
-                  }}
                   onError={handleError}
                   onScan={handleScan}
                   className="rounded-3xl m-1"
