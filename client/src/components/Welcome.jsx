@@ -192,6 +192,9 @@ const Welcome = () => {
                   <QrReader
                   delay={delay}
                   style={previewStyle}
+                  constraints={{
+                    facingMode: 'environment'
+                  }}
                   onError={handleError}
                   onScan={handleScan}
                   className="rounded-3xl m-1"
